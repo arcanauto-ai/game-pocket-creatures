@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1788453454|4405025';
+const CACHE_VERSION = '1788454160|4939182';
 /** @type {string} */
 const CACHE_PREFIX = 'PocketCreatures-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
