@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head><script>
+// Show errors on screen since F12 is blocked by Godot
+window.onerror=function(m,s,l,c,e){
+  var d=document.createElement('div');
+  d.style.cssText='position:fixed;top:10px;left:10px;right:10px;background:rgba(255,0,0,0.9);color:white;padding:10px;z-index:99999;font-size:14px;font-family:monospace;white-space:pre-wrap';
+  d.textContent='ERROR: '+m+'
+'+s+':'+l;
+  document.body.appendChild(d);
+};
+window.addEventListener('unhandledrejection',function(e){
+  var d=document.createElement('div');
+  d.style.cssText='position:fixed;top:10px;left:10px;right:10px;background:rgba(255,0,0,0.9);color:white;padding:10px;z-index:99999;font-size:14px;font-family:monospace;white-space:pre-wrap';
+  d.textContent='PROMISE ERROR: '+e.reason;
+  document.body.appendChild(d);
+});
+// Override console.error to show on screen
+var origErr=console.error;
+console.error=function(){
+  origErr.apply(console,arguments);
+  var d=document.createElement('div');
+  d.style.cssText='position:fixed;bottom:60px;left:10px;right:10px;background:rgba(200,0,0,0.9);color:white;padding:8px;z-index:99999;font-size:12px;font-family:monospace;max-height:200px;overflow:auto;white-space:pre-wrap';
+  d.textContent='[ERR] '+Array.from(arguments).join(' ');
+  document.body.appendChild(d);
+  setTimeout(function(){d.remove()},15000);
+};
+</script>
+<script>
 // Force clear all caches and unregister old service workers
 if('serviceWorker' in navigator){
   navigator.serviceWorker.getRegistrations().then(function(regs){
@@ -125,7 +151,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":2116744,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck?v=1788458487":2116744,"index.wasm?v=1788458487":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
